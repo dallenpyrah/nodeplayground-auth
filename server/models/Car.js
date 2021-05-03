@@ -9,7 +9,7 @@ const Car = new Schema(
     year: { type: Number, required: true },
     creatorId: { type: String, ref: 'Account', required: true },
     seats: { type: Number }
-  }, { timestamps: true, _id: false, toJSON: { virtuals: true } }
+  }, { timestamps: true, toJSON: { virtuals: true } }
 )
 
 Car.virtual('creator', {
