@@ -43,7 +43,7 @@ export class CarsController extends BaseController {
     try {
       req.body.id = req.params.id
       req.body.creatorId = req.userInfo.id
-      return res.send(await carsService.editCar(req.params.id, req.body))
+      return res.send(await carsService.editCar(req.params.id, req.body, req.userInfo.id))
     } catch (error) {
       next(error)
     }
