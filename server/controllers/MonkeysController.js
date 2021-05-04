@@ -7,7 +7,11 @@ export class MonkeysController extends BaseController {
     super('api/monkeys')
     this.router
       .get('', this.getAllMonkeys)
+      .get('/:id', this.getMonkeyById)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .post('', this.createMonkey)
+      .delete('/:id', this.deleteMonkey)
+      .put('/:id', this.editMonkey)
   }
 
   async getAllMonkeys(req, res, next) {
