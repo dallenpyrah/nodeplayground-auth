@@ -5,7 +5,7 @@ class MonkeysService {
   // I am making two different variables because I want to try it different ways and this might allow for more data manipulation.
   async deleteMonkey(id, userId) {
     const monkey = await this.getMonkeyById(id)
-    if (monkey.creatorid !== userId) {
+    if (monkey.creatorId !== userId) {
       throw new BadRequest('This is not your monkey you can not delete this.')
     }
     const deletedMonkey = await dbContext.Monkey.findOneAndDelete({ _id: id, creatorId: userId })

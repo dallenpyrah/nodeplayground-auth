@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { junglesService } from '../services/JunglesService'
+import { monkeysService } from '../services/MonkeysService'
 import BaseController from '../utils/BaseController'
 
 export class JunglesController extends BaseController {
@@ -9,9 +10,18 @@ export class JunglesController extends BaseController {
       .get('', this.getAllJungles)
       .get('/:id', this.getJungleById)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('/:id/monkeys', this.getMonkeyByJungleId)
       .post('', this.createJungle)
       .delete('/:id', this.deleteJungle)
       .put('/:id', this.editJungle)
+  }
+
+  async getMonkeyByJungleId(req, res, next) {
+    try {
+      return res.send(await monkeysService.find({ jungleId: req.params.id }))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getAllJungles(req, res, next) {

@@ -44,7 +44,7 @@ export class MonkeysController extends BaseController {
 
   async editMonkey(req, res, next) {
     try {
-      req.params.id = req.body.id
+      req.body.Id = req.params.id
       req.body.creatorId = req.userInfo.id
       const editedMonkey = await monkeysService.editMonkey(req.params.id, req.body, req.userInfo.id)
       return res.send(editedMonkey)
