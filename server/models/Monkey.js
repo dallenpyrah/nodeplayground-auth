@@ -13,4 +13,10 @@ const Monkey = new Schema(
     creatorId: { type: String, ref: 'Account', required: true }
   }, { timestamps: true, toJSON: { virtuals: true } })
 
+Monkey.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
 export default Monkey

@@ -11,4 +11,10 @@ const Jungle = new Schema(
   }, { timestamps: true, toJSON: { virtuals: true } }
 )
 
+Jungle.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
 export default Jungle
