@@ -4,6 +4,7 @@ import AccountSchema from '../models/Account'
 import CarSchema from '../models/Car'
 import JungleSchema from '../models/Jungle'
 import MonkeySchema from '../models/Monkey'
+import BirdSchema from '../models/Bird'
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
@@ -13,6 +14,8 @@ class DbContext {
   Jungle = mongoose.model('Jungle', JungleSchema)
 
   Monkey = mongoose.model('Monkey', MonkeySchema)
+
+  Bird = mongoose.model('Bird', BirdSchema)
 }
 
 export const dbContext = new DbContext()
