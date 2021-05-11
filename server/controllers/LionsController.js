@@ -14,7 +14,7 @@ export class LionsController extends BaseController {
 
   async getAllLions(req, res, next) {
     try {
-      return res.send(await lionsService.find())
+      return res.send(await lionsService.find()).populate('creator')
     } catch (error) {
       next(error)
     }
@@ -22,7 +22,7 @@ export class LionsController extends BaseController {
 
   async getLionById(req, res, next) {
     try {
-      return res.send(await lionsService.findById(req.params.id))
+      return res.send(await lionsService.findById(req.params.id)).populate('creator')
     } catch (error) {
       next(error)
     }
@@ -51,7 +51,7 @@ export class LionsController extends BaseController {
     try {
       req.body.id = req.params.id
       req.body.creatorId = req.userInfo.id
-      return res.send(await lionsService.editLion(req.params.id, req.body, req.userInfo.id))
+      return res.send(await lionsService.editLion(req.params.id, req.body, req.userInfo.id)).populate('creator')
     } catch (error) {
       next(error)
     }

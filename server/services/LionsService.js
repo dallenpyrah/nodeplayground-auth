@@ -7,7 +7,7 @@ class LionsService {
     if (lion.creatorId !== userId) {
       throw new BadRequest('You are not the creator, you can not edit this lion.')
     }
-    return await dbContext.Lion.findOneAndUpdate({ _id: id, creatorId: userId }, body)
+    return await dbContext.Lion.findOneAndUpdate({ _id: id, creatorId: userId }, body).populate('creator')
   }
 
   async deleteLion(id, userId) {
@@ -23,7 +23,7 @@ class LionsService {
   }
 
   async findById(id) {
-    const lion = await dbContext.Lion.findById(id)
+    const lion = await dbContext.Lion.findById(id).populate('creator')
     if (!lion) {
       throw new BadRequest('Invalid Id: No lion found.')
     }
@@ -31,7 +31,7 @@ class LionsService {
   }
 
   async find(query = {}) {
-    const lions = await dbContext.Lion.find(query)
+    const lions = await dbContext.Lion.find(query).populate('creator')
     if (!lions) {
       throw new BadRequest('No lions found')
     }
