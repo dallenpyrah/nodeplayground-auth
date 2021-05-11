@@ -1,19 +1,37 @@
+import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
 
 class TigersService {
-  editTiger(body, id, id) {
-    throw new Error('Method not implemented.')
+  async editTiger(body, id, userId) {
+    const tiger = await this.findById(id)
+    if (tiger.creatorId !== userId) {
+      throw new BadRequest('You are not the creator you can not edit this tiger')
+    }
+    return await dbContext.Tiger.findOneAndUpdate({ _id: id, creatorId: userId }, body)
   }
-  deleteTiger(id, id) {
-    throw new Error('Method not implemented.')
+
+  async deleteTiger(id, userId) {
+    const tiger = await this.findById(id)
+    if (tiger.creatorId !== userId) {
+      throw new BadRequest('You are not the creator you can not delete this tiger')
+    }
+    return await dbContext.Tiger.findOneAndDelete({ _id: id, creatorId: userId })
   }
-  createTiger(body) {
-    throw new Error('Method not implemented.')
+
+  async createTiger(body) {
+    return await dbContext.Tiger.create(body)
   }
-  findById(id) {
-    throw new Error('Method not implemented.')
+
+  async findById(id) {
+    const tiger = await dbContext.Tiger.findById(id)
+    if (!tiger) {
+      throw new BadRequest('Invalid ID: No tiger found')
+    }
+    return tiger
   }
-  find() {
-    throw new Error('Method not implemented.')
+
+  async find(query = {}) {
+    return await dbContext.Tiger.find(query)
   }
 }
 

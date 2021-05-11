@@ -6,6 +6,7 @@ import JungleSchema from '../models/Jungle'
 import MonkeySchema from '../models/Monkey'
 import BirdSchema from '../models/Bird'
 import LionSchema from '../models/Lion'
+import TigerSchema from '../models/Tiger'
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
@@ -19,6 +20,8 @@ class DbContext {
   Bird = mongoose.model('Bird', BirdSchema)
 
   Lion = mongoose.model('Lion', LionSchema)
+
+  Tiger = mongoose.model('Tiger', TigerSchema)
 }
 
 export const dbContext = new DbContext()
